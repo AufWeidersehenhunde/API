@@ -1,4 +1,4 @@
-package com.example.architecturecomponent.daos
+package com.example.api.daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -6,24 +6,29 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.example.architecturecomponent.dpandprovider.SomethingDb
+import com.example.api.DBandprovider.PersonDb
+
 
 
 @Dao
 interface DaoDao {
 
-    @Query("SELECT * FROM txt")
-    fun getAllSomethingData():LiveData<List<SomethingDb>>
+    @Query("SELECT * FROM rick_and_morty1")
+    fun getAllSomethingData(): LiveData<List<PersonDb>>
 
-    @Query("SELECT * FROM txt WHERE uuid =:uuid")
-    suspend fun getItemForId(uuid: String): SomethingDb
+    @Query("SELECT * FROM rick_and_morty1 WHERE uuid =:uuid")
+    suspend fun getItemForId(uuid: String): PersonDb
+
 
     @Insert
-    suspend fun addSomething(model: SomethingDb)
+    fun insertAllData(list: List<PersonDb>)
+
+    @Insert
+    suspend fun addSomething(model: PersonDb)
 
     @Delete
-    suspend fun deleteSomething(model: SomethingDb)
+    suspend fun deleteSomething(model: PersonDb)
 
     @Update
-    suspend fun updateSomething(model: SomethingDb)
+    suspend fun updateSomething(model: PersonDb)
 }

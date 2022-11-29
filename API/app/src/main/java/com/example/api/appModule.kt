@@ -3,8 +3,8 @@ package com.example.api
 import androidx.room.Room
 import com.example.api.HomeFragment.HomeViewModel
 import com.example.api.MainActivity.MainActivityViewModel
-import com.example.architecturecomponent.dpandprovider.DBprovider
-import com.example.architecturecomponent.repository.Repository
+import com.example.api.DBandprovider.DBprovider
+import com.example.api.repository.Repository
 
 import com.github.terrakok.cicerone.Cicerone
 import org.koin.android.ext.koin.androidApplication

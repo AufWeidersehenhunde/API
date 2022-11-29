@@ -9,21 +9,22 @@ import com.example.api.CharacterList
 import com.example.api.R
 
 import com.example.api.databinding.RecyclerItemBinding
+import com.example.api.DBandprovider.PersonDb
 import retrofit2.Response
 
 
-class MyAdapter (private val delet:(Character1) -> Unit,private val addSome:(Character1) -> Unit): RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class MyAdapter (private val delet:(PersonDb) -> Unit,private val addSome:(PersonDb) -> Unit): RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
-    var Items: MutableList<Character1> = mutableListOf()
-    fun set(items: List<Character1>) {
-        this.Items = items.toMutableList()
+    var Items: List<PersonDb> = listOf()
+    fun set(items: List<PersonDb>) {
+        this.Items = items
         notifyDataSetChanged()
     }
 
     inner class MyViewHolder(itemBinding: RecyclerItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         private val binding = itemBinding
-        fun bind(character: Character1) {
+        fun bind(character: PersonDb) {
             binding.apply {
                 nameText.text = character.name
                 statusText.text = character.status

@@ -4,13 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.api.DBandprovider.PersonDb
 import com.example.api.Recycler.MyAdapter
 import com.example.api.databinding.RecyclerItemBinding
 
-class MyAdapterForFavorite (private val deletis:(Character1) -> Unit): RecyclerView.Adapter<MyAdapterForFavorite.MyViewHolder>() {
+class MyAdapterForFavorite (private val deletis:(PersonDb) -> Unit): RecyclerView.Adapter<MyAdapterForFavorite.MyViewHolder>() {
 
-    var Items: MutableList<Character1> = mutableListOf()
-    fun set(items: List<Character1>) {
+    var Items: MutableList<PersonDb> = mutableListOf()
+    fun set(items: List<PersonDb>) {
         this.Items = items.toMutableList()
         notifyDataSetChanged()
     }
@@ -18,7 +19,7 @@ class MyAdapterForFavorite (private val deletis:(Character1) -> Unit): RecyclerV
     inner class MyViewHolder(itemBinding: RecyclerItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         private val binding = itemBinding
-        fun bind(character: Character1) {
+        fun bind(character: PersonDb) {
             binding.apply {
                 nameText.text = character.name
                 statusText.text = character.status

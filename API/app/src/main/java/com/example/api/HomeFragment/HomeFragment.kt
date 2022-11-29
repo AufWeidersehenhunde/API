@@ -22,14 +22,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun goToView() {
-        viewMH.listCharacters.observe(viewLifecycleOwner){
+        viewMH.getCharacters(1)
+
+
+        viewMH.observeAllSomething().observe(viewLifecycleOwner) {
             someAdapter?.set(it)
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewMH.getCharacters(1)
+//        viewMH.getCharacters(1)
         someAdapter = MyAdapter({viewMH.delSomething(it)},{viewMH.takeThis(it)})
         with(viewBinding.recyclerView) {
             layoutManager = GridLayoutManager(
