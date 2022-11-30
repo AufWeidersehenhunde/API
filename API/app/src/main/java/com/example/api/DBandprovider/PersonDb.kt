@@ -6,14 +6,14 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.util.*
 
-@Entity(tableName = "rick_and_morty1")
+@Entity(tableName = "persons")
 data class PersonDb(
-    @PrimaryKey var uuid:String = UUID.randomUUID().toString(),
-    @ColumnInfo(name = "name") var name: String = "woman",
-    @ColumnInfo(name = "gender") var gender: String = "shlyapa",
-    @ColumnInfo(name = "image") var image:String ?,
-    @ColumnInfo(name = "status") var status:String?,
-    @ColumnInfo(name = "species") var species:String?,
-    @ColumnInfo(name = "id") var id:Int?,
-    @ColumnInfo(name = "favorite") var favorite:Boolean
-): Serializable
+    @PrimaryKey val uuid: String = UUID.randomUUID().toString(),
+    @ColumnInfo(name = "name") val name: String?,
+    @ColumnInfo(name = "gender") val gender: String?,
+    @ColumnInfo(name = "image") val image: String?,
+    @ColumnInfo(name = "status") val status: String?,
+    @ColumnInfo(name = "species") val species: String?,
+    @ColumnInfo(name = "isFavorite") val isFavorite: Boolean = false
+
+) : Serializable

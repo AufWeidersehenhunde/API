@@ -4,20 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.api.Character1
-import com.example.api.CharacterList
-import com.example.api.R
-
 import com.example.api.databinding.RecyclerItemBinding
 import com.example.api.DBandprovider.PersonDb
-import retrofit2.Response
 
 
-class MyAdapter (private val delet:(PersonDb) -> Unit,private val addSome:(PersonDb) -> Unit): RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
-    var Items: List<PersonDb> = listOf()
+class MyAdapter(private val delet: (PersonDb) -> Unit, private val addSome: (PersonDb) -> Unit) :
+    RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+
+    var item: List<PersonDb> = listOf()
     fun set(items: List<PersonDb>) {
-        this.Items = items
+        this.item = items
         notifyDataSetChanged()
     }
 
@@ -30,22 +27,20 @@ class MyAdapter (private val delet:(PersonDb) -> Unit,private val addSome:(Perso
                 statusText.text = character.status
                 genderText.text = character.gender
 
-                 Glide.with(imageView.context)
+                Glide.with(imageView.context)
                     .load(character.image)
                     .into(imageView)
-                    btnDel.setOnClickListener {
-                       delet(character)
-                        notifyDataSetChanged()
-                    }
-                    btnAddToMyFavorite.setOnClickListener {
-                        addSome(character)
-                        notifyDataSetChanged()
-                    }
+                btnDel.setOnClickListener {
+                    delet(character)
+                    notifyDataSetChanged()
+                }
+                btnAddToMyFavorite.setOnClickListener {
+                    addSome(character)
+                    notifyDataSetChanged()
+                }
             }
             return
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -55,19 +50,11 @@ class MyAdapter (private val delet:(PersonDb) -> Unit,private val addSome:(Perso
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(Items[position])
+        holder.bind(item[position])
 
     }
 
     override fun getItemCount(): Int {
-        return Items.size
+        return item.size
     }
-
-//    fun set(items: List<SomethingDb>){
-//        this.Items = listOf()
-//        this.Items = items
-//        notifyDataSetChanged()
-//    }
-
-
 }

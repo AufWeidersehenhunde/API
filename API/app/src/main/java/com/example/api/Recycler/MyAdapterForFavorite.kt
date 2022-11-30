@@ -1,18 +1,18 @@
-package com.example.api
+package com.example.api.Recycler
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.api.DBandprovider.PersonDb
-import com.example.api.Recycler.MyAdapter
 import com.example.api.databinding.RecyclerItemBinding
 
-class MyAdapterForFavorite (private val deletis:(PersonDb) -> Unit): RecyclerView.Adapter<MyAdapterForFavorite.MyViewHolder>() {
+class MyAdapterForFavorite (private val remove:(PersonDb) -> Unit): RecyclerView.Adapter<MyAdapterForFavorite.MyViewHolder>() {
 
-    var Items: MutableList<PersonDb> = mutableListOf()
+    var item: MutableList<PersonDb> = mutableListOf()
     fun set(items: List<PersonDb>) {
-        this.Items = items.toMutableList()
+        this.item = items.toMutableList()
         notifyDataSetChanged()
     }
 
@@ -29,14 +29,10 @@ class MyAdapterForFavorite (private val deletis:(PersonDb) -> Unit): RecyclerVie
                     .load(character.image)
                     .into(imageView)
                 btnDel.setOnClickListener {
-                    deletis(character)
+                    remove(character)
                     notifyDataSetChanged()
                 }
-//                btnDislike.setOnClickListener {
-//                    notifyItemRemoved(position)
-//                }
-//                btnLike.setOnClickListener {
-//                }
+                binding.btnAddToMyFavorite.visibility = View.INVISIBLE
             }
             return
         }
@@ -51,11 +47,11 @@ class MyAdapterForFavorite (private val deletis:(PersonDb) -> Unit): RecyclerVie
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(Items[position])
+        holder.bind(item[position])
 
     }
 
     override fun getItemCount(): Int {
-        return Items.size
+        return item.size
     }
 }

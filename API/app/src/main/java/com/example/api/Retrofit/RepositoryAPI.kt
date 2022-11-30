@@ -1,30 +1,19 @@
-package com.example.api
+package com.example.api.Retrofit
 
-import android.app.Application
-import android.content.Context
-import android.widget.Toast
+import com.example.api.CharacterList
 import com.example.api.DBandprovider.PersonDb
-import com.example.api.RetrofitInst.api
-import com.github.terrakok.cicerone.Router
-import retrofit2.Response
+import com.example.api.Retrofit.RetrofitInst.api
 
 
-class RepositoryRam(
+class RepositoryAPI(
 //   private val  apiRaM: ApiRaM
 ) {
-    var list = mutableListOf<PersonDb>()
+    val list = mutableListOf<PersonDb>()
 
     suspend fun getCharacters(page: Int): CharacterList {
         val itemsList: CharacterList?
         itemsList = api.getCharacters(page).body() ?: CharacterList(listOf())
         return itemsList
-    }
-
-    fun addFavorite(it: PersonDb) {
-        list.add(it)
-    }
-    fun removeIt(it:PersonDb){
-        list.remove(it)
     }
 }
 //       return safeApiCall { apiRaM.getCharacters(page) }

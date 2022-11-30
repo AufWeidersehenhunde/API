@@ -1,9 +1,7 @@
-package com.example.api
+package com.example.api.Retrofit
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -16,7 +14,7 @@ object RetrofitInst {
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
-    val api:ApiRaM by lazy {
+    val api: ApiRaM by lazy {
         retrofit.create(ApiRaM::class.java)
     }
 

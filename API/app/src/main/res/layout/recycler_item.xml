@@ -7,6 +7,7 @@
     android:layout_height="190dp"
     android:layout_columnSpan="2"
     android:layout_span="2"
+    android:background="@color/purple_500"
     >
 
 
@@ -21,19 +22,20 @@
 
     <TextView
         android:id="@+id/statusText"
-        android:layout_width="184dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_row="2"
         android:layout_column="0"
-        android:layout_marginStart="2dp"
+        android:layout_marginLeft="11dp"
         android:layout_marginEnd="12dp" />
 
     <TextView
         android:id="@+id/nameText"
-        android:layout_width="wrap_content"
-        android:layout_height="29dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_row="1"
-        android:layout_column="0" />
+        android:layout_column="0"
+        android:layout_marginLeft="11dp" />
 
     <TextView
         android:id="@+id/genderText"
@@ -50,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_row="3"
         android:layout_column="0"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="9dp"
         android:tint="@color/white"
         app:srcCompat="@drawable/ic_baseline_restore_from_trash_24"
         tools:ignore="UseAppTint" />
@@ -61,7 +63,7 @@
         android:layout_height="22dp"
         android:layout_row="3"
         android:layout_column="0"
-        android:layout_marginLeft="155dp"
+        android:layout_marginLeft="149dp"
         app:srcCompat="@android:drawable/btn_star_big_off" />
 
 </GridLayout>
