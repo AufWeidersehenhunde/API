@@ -6,7 +6,6 @@ import com.example.api.Retrofit.RetrofitInst.api
 
 
 class RepositoryAPI(
-//   private val  apiRaM: ApiRaM
 ) {
     val list = mutableListOf<PersonDb>()
 

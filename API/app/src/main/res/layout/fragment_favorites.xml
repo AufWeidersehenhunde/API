@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragment.HomeFragment">
 
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="105dp"
-        android:layout_height="41dp"
-        android:text="Back"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFavorite"
         android:layout_width="match_parent"
@@ -24,12 +14,10 @@
         android:layout_marginEnd="11dp"
         android:translationZ="-1dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.484"
         app:spanCount="2" />
 
 

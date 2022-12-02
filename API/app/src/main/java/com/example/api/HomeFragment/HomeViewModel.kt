@@ -1,6 +1,7 @@
 package com.example.api.HomeFragment
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import com.example.api.repository.RepositorySQLite
 import com.example.api.DBandprovider.PersonDb
@@ -17,34 +18,44 @@ class HomeViewModel (
     private val repositorySQLite: RepositorySQLite,
     private val repositoryAPI: RepositoryAPI
         ): ViewModel() {
-    private val _listCharacters = MutableStateFlow<List<PersonDb>>(emptyList())
+     val _listCharacters = MutableStateFlow<List<PersonDb>>(emptyList())
 
 
     fun getCharacters(page: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             val characters = repositoryAPI.getCharacters(page)
-            _listCharacters.value = characters.results
+            //_listCharacters.value = characters.results
             repositorySQLite.insertAllData(characters.results)
         }
-
     }
-    fun getItFavorite(uuid:String) {
+    fun viewSortPersons(statusApi:String,genderApi:String,speciesApi:String){
+        viewModelScope.launch (Dispatchers.IO){
+           _listCharacters.value = repositorySQLite.putInSort(statusApi,genderApi,speciesApi)
+        }
+    }
+    fun getItFavorite(uuid:Int) {
         viewModelScope.launch(Dispatchers.IO) {
            repositorySQLite.putInFavorite(uuid)
         }
     }
 
-    fun observeAllPersons() = repositorySQLite.getAllSomethingData()
-    fun favorite() {
-        router.navigateTo(Screens.getFavoriteFragment())
+    fun observeAllPersons()  {
+        viewModelScope.launch {
+            repositorySQLite.getAllSomethingData().collect{
+                _listCharacters.value = it
+            }
+        }
+    }
+    fun routeToInfo(uuid:Int){
+        router.navigateTo(Screens.getInfoFragment(uuid))
     }
 
+
     fun delPerson(model:PersonDb) {
-        viewModelScope.launch {
             viewModelScope.launch {
                 repositorySQLite.deletePerson(model)
             }
         }
     }
 
-}
+

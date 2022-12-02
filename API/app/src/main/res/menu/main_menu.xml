@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<item
+    android:title="My favourites"
+    android:id="@+id/myFavorite"
+    android:icon="@drawable/ic_baseline_star_24"
+    app:showAsAction="never"
+    android:orderInCategory="100" />
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search"
+        android:title="Search"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView" />
+    <item
+        android:title="Sorting"
+        android:id="@+id/sort"
+        android:icon="@drawable/ic_baseline_sort_24"
+        app:showAsAction="never"
+        android:orderInCategory="100" />
+    <item
+        android:title="Reset sorting"
+        android:id="@+id/reset"
+        android:icon="@drawable/ic_baseline_sort_24"
+        app:showAsAction="never"
+        android:orderInCategory="100" />
+    <item
+        android:title="Exit"
+        android:id="@+id/exit"
+        android:icon="@drawable/ic_baseline_power_off"
+        app:showAsAction="never"
+        android:orderInCategory="100" />
+
+
+</menu>

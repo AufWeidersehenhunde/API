@@ -1,15 +1,17 @@
 package com.example.api.Recycler
 
+import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.api.databinding.RecyclerItemBinding
 import com.example.api.DBandprovider.PersonDb
+import com.example.api.R
 
 
-
-class MyAdapter(private val delet: (PersonDb) -> Unit, private val addSome: (PersonDb) -> Unit) :
+class MyAdapter(private val delet: (PersonDb) -> Unit, private val addSome: (PersonDb) -> Unit, private val info:(PersonDb) -> Unit) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     var item: List<PersonDb> = listOf()
@@ -24,7 +26,6 @@ class MyAdapter(private val delet: (PersonDb) -> Unit, private val addSome: (Per
         fun bind(character: PersonDb) {
             binding.apply {
                 nameText.text = character.name
-                statusText.text = character.status
                 genderText.text = character.gender
 
                 Glide.with(imageView.context)
@@ -37,6 +38,9 @@ class MyAdapter(private val delet: (PersonDb) -> Unit, private val addSome: (Per
                 btnAddToMyFavorite.setOnClickListener {
                     addSome(character)
                     notifyDataSetChanged()
+                }
+                imageView.setOnClickListener {
+                    info(character)
                 }
             }
             return

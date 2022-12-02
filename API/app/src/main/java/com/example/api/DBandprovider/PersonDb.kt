@@ -8,7 +8,7 @@ import java.util.*
 
 @Entity(tableName = "persons")
 data class PersonDb(
-    @PrimaryKey val uuid: String = UUID.randomUUID().toString(),
+    @PrimaryKey val id: Int,
     @ColumnInfo(name = "name") val name: String?,
     @ColumnInfo(name = "gender") val gender: String?,
     @ColumnInfo(name = "image") val image: String?,

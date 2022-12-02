@@ -5,8 +5,10 @@ import com.example.api.HomeFragment.HomeViewModel
 import com.example.api.MainActivity.MainActivityViewModel
 import com.example.api.DBandprovider.DBprovider
 import com.example.api.FavoriteFragment.FavoritesViewModel
+import com.example.api.InfoFragment.InfoViewModel
 import com.example.api.Retrofit.RetrofitInst
 import com.example.api.Retrofit.RepositoryAPI
+import com.example.api.SortFragment.SortViewModel
 import com.example.api.repository.RepositorySQLite
 
 import com.github.terrakok.cicerone.Cicerone
@@ -18,11 +20,11 @@ val appModule = module {
     val cicerone = Cicerone.create()
     single { cicerone.router }
     single { cicerone.getNavigatorHolder() }
-
+    viewModel  {InfoViewModel(get(), get())}
     viewModel { HomeViewModel(get(), get(), get()) }
     viewModel { FavoritesViewModel(get(), get(), get()) }
     viewModel { MainActivityViewModel(get()) }
-
+    viewModel { SortViewModel(get(), get(), get()) }
     single {
         Room.databaseBuilder(
             androidApplication().applicationContext,

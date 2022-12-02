@@ -22,7 +22,6 @@ class MyAdapterForFavorite (private val remove:(PersonDb) -> Unit): RecyclerView
         fun bind(character: PersonDb) {
             binding.apply {
                 nameText.text = character.name
-                statusText.text = character.status
                 genderText.text = character.gender
 
                 Glide.with(imageView.context)

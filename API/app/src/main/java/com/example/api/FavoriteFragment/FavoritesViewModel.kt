@@ -26,7 +26,7 @@ class FavoritesViewModel(
         router.backTo(Screens.getHomeFragment())
     }
 
-    fun delFavoritePerson(uuid: String) {
+    fun delFavoritePerson(uuid: Int) {
         viewModelScope.launch {
             repositorySQL.deleteFavoritePerson(uuid)
         }

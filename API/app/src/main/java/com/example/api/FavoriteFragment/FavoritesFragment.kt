@@ -13,27 +13,25 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private val viewBinding: FragmentFavoritesBinding by viewBinding()
     private val viewModelFavorite: FavoritesViewModel by viewModel()
-    private var AdapterFavorite: MyAdapterForFavorite? = null
+    private var adapterFavorite: MyAdapterForFavorite? = null
 
-    private fun observeElement() {
-        viewModelFavorite.observeAllFavoriteData().observe(viewLifecycleOwner) {
-            AdapterFavorite?.set(it)
-        }
-    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        AdapterFavorite = MyAdapterForFavorite({ viewModelFavorite.delFavoritePerson(it.uuid) })
+        adapterFavorite = MyAdapterForFavorite({ viewModelFavorite.delFavoritePerson(it.id) })
         with(viewBinding.recyclerViewFavorite) {
             layoutManager = GridLayoutManager(
                 context, 2
             )
-            adapter = AdapterFavorite
-        }
-        viewBinding.btnBack.setOnClickListener {
-            viewModelFavorite.backFragment()
+            adapter = adapterFavorite
         }
         viewModelFavorite.getCharactersFavorite()
         observeElement()
+    }
+    private fun observeElement() {
+        viewModelFavorite.observeAllFavoriteData().observe(viewLifecycleOwner) {
+            adapterFavorite?.set(it)
+        }
     }
 }

@@ -17,11 +17,18 @@ class RepositorySQLite(
 
     fun insertFavorite(list: List<PersonDb>) = personDao.insertFavorite(list)
 
-    suspend fun putInFavorite(uuid: String) = personDao.putInFavorite(uuid)
+    suspend fun getInfo(uuid: Int) = personDao.getItemForId(uuid)
 
-    suspend fun deleteFavoritePerson(uuid: String) = personDao.deleteFavoritePerson(uuid)
+    suspend fun putInFavorite(uuid: Int) = personDao.putInFavorite(uuid)
+
+    suspend fun deleteFavoritePerson(uuid: Int) = personDao.deleteFavoritePerson(uuid)
 
     suspend fun deletePerson(it: PersonDb) = personDao.deletePerson(it)
+
+    suspend fun putInSort(statusApi: String, genderApi: String, speciesApi: String) = personDao.putInSort(statusApi, genderApi, speciesApi)
+
+    fun getPicture(uri: String) = personDao.getPicture(uri)
+
 
 }
 
