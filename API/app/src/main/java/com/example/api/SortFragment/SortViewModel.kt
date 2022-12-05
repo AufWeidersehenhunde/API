@@ -7,9 +7,7 @@ import com.example.api.repository.RepositorySQLite
 import com.github.terrakok.cicerone.Router
 
 class SortViewModel (
-    private val router: Router,
-    private val repositorySQLite: RepositorySQLite,
-    private val repositoryAPI: RepositoryAPI
+    private val router: Router
 ): ViewModel(){
 
     fun goBack(){

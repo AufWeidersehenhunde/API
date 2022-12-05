@@ -21,10 +21,10 @@ val appModule = module {
     single { cicerone.router }
     single { cicerone.getNavigatorHolder() }
     viewModel  {InfoViewModel(get(), get())}
-    viewModel { HomeViewModel(get(), get(), get()) }
-    viewModel { FavoritesViewModel(get(), get(), get()) }
-    viewModel { MainActivityViewModel(get()) }
-    viewModel { SortViewModel(get(), get(), get()) }
+    viewModel { HomeViewModel(get(), get()) }
+    viewModel { FavoritesViewModel(get()) }
+    viewModel { MainActivityViewModel(get(),get(),get()) }
+    viewModel { SortViewModel(get()) }
     single {
         Room.databaseBuilder(
             androidApplication().applicationContext,

@@ -17,7 +17,7 @@ interface PersonDao {
     fun getAllSomethingData(): Flow<List<PersonDb>>
 
     @Query("SELECT * FROM persons WHERE isFavorite = 1")
-    fun getAllFavoriteData(): LiveData<List<PersonDb>>
+    fun getAllFavoriteData(): List<PersonDb>
 
     @Query("UPDATE persons SET isFavorite = 1 WHERE id =:uuid ")
     suspend fun putInFavorite(uuid: Int)
@@ -28,10 +28,7 @@ interface PersonDao {
     @Query("UPDATE persons SET isFavorite = 0 WHERE id =:uuid ")
     suspend fun deleteFavoritePerson(uuid: Int)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFavorite(list: List<PersonDb>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAllData(list: List<PersonDb>)
 
     @Delete

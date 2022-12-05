@@ -15,8 +15,6 @@ class RepositorySQLite(
 
     fun insertAllData(list: List<PersonDb>) = personDao.insertAllData(list)
 
-    fun insertFavorite(list: List<PersonDb>) = personDao.insertFavorite(list)
-
     suspend fun getInfo(uuid: Int) = personDao.getItemForId(uuid)
 
     suspend fun putInFavorite(uuid: Int) = personDao.putInFavorite(uuid)

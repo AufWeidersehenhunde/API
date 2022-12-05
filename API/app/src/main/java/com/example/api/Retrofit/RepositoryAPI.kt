@@ -7,7 +7,6 @@ import com.example.api.Retrofit.RetrofitInst.api
 
 class RepositoryAPI(
 ) {
-    val list = mutableListOf<PersonDb>()
 
     suspend fun getCharacters(page: Int): CharacterList {
         val itemsList: CharacterList?

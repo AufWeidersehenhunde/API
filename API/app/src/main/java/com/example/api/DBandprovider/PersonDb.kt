@@ -16,4 +16,4 @@ data class PersonDb(
     @ColumnInfo(name = "species") val species: String?,
     @ColumnInfo(name = "isFavorite") val isFavorite: Boolean = false
 
-) : Serializable
+)

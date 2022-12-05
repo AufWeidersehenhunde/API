@@ -15,19 +15,11 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel (
     private val router: Router,
-    private val repositorySQLite: RepositorySQLite,
-    private val repositoryAPI: RepositoryAPI
+    private val repositorySQLite: RepositorySQLite
         ): ViewModel() {
      val _listCharacters = MutableStateFlow<List<PersonDb>>(emptyList())
 
 
-    fun getCharacters(page: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val characters = repositoryAPI.getCharacters(page)
-            //_listCharacters.value = characters.results
-            repositorySQLite.insertAllData(characters.results)
-        }
-    }
     fun viewSortPersons(statusApi:String,genderApi:String,speciesApi:String){
         viewModelScope.launch (Dispatchers.IO){
            _listCharacters.value = repositorySQLite.putInSort(statusApi,genderApi,speciesApi)

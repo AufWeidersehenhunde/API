@@ -36,9 +36,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val myStatus = arguments?.getString(DATA)
         val myGender = arguments?.getString(GENDER)
         val mySpecies = arguments?.getString(SPECIES)
+
         observeElement()
         adapterHome =
             MyAdapter({ viewModelHome.delPerson(it) }, { viewModelHome.getItFavorite(it.id) }, {viewModelHome.routeToInfo(it.id)})
+
         with(viewBinding.recyclerView) {
             layoutManager = GridLayoutManager(
                 context, 2
@@ -53,7 +55,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 mySpecies.toString()
             )
         }else {
-            viewModelHome.getCharacters(1)
             viewModelHome.observeAllPersons()
         }
         viewBinding.button.visibility = View.INVISIBLE
