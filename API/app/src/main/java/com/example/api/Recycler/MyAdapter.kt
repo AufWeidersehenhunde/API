@@ -1,17 +1,22 @@
 package com.example.api.Recycler
 
+
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.api.databinding.RecyclerItemBinding
 import com.example.api.DBandprovider.PersonDb
-import com.example.api.R
 
 
-class MyAdapter(private val delet: (PersonDb) -> Unit, private val addSome: (PersonDb) -> Unit, private val info:(PersonDb) -> Unit) :
+class MyAdapter(
+    private val delet: (PersonDb) -> Unit,
+    private val addSome: (PersonDb) -> Unit,
+    private val info: (PersonDb) -> Unit
+) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     var item: List<PersonDb> = listOf()
@@ -25,6 +30,16 @@ class MyAdapter(private val delet: (PersonDb) -> Unit, private val addSome: (Per
         private val binding = itemBinding
         fun bind(character: PersonDb) {
             binding.apply {
+                val listColor =
+                    arrayOf(Color.RED, Color.BLUE, Color.BLACK)
+                if (character.status == "Dead") {
+                    recitem.setBackgroundColor(listColor[2])
+                } else if(character.status == "Alive") {
+                    recitem.setBackgroundColor(listColor[1])
+                }
+                else if (character.status == "unknown") {
+                    recitem.setBackgroundColor(listColor[0])
+                }
                 nameText.text = character.name
                 genderText.text = character.gender
 
@@ -35,6 +50,12 @@ class MyAdapter(private val delet: (PersonDb) -> Unit, private val addSome: (Per
                     delet(character)
                     notifyDataSetChanged()
                 }
+                if (character.isFavorite) {
+                    btnAddToMyFavorite.setColorFilter(Color.YELLOW)
+                } else {
+                    btnAddToMyFavorite.setColorFilter(Color.WHITE)
+                }
+
                 btnAddToMyFavorite.setOnClickListener {
                     addSome(character)
                     notifyDataSetChanged()

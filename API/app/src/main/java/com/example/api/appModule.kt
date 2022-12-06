@@ -20,7 +20,7 @@ val appModule = module {
     val cicerone = Cicerone.create()
     single { cicerone.router }
     single { cicerone.getNavigatorHolder() }
-    viewModel  {InfoViewModel(get(), get())}
+    viewModel  {InfoViewModel(get())}
     viewModel { HomeViewModel(get(), get()) }
     viewModel { FavoritesViewModel(get()) }
     viewModel { MainActivityViewModel(get(),get(),get()) }

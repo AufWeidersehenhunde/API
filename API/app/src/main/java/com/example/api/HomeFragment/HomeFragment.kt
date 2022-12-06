@@ -1,10 +1,13 @@
 package com.example.api.HomeFragment
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.internal.findRootView
 import com.example.api.Recycler.MyAdapter
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.api.R
@@ -42,8 +45,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             MyAdapter({ viewModelHome.delPerson(it) }, { viewModelHome.getItFavorite(it.id) }, {viewModelHome.routeToInfo(it.id)})
 
         with(viewBinding.recyclerView) {
-            layoutManager = GridLayoutManager(
-                context, 2
+            layoutManager = LinearLayoutManager(
+                context
             )
             adapter = adapterHome
         }

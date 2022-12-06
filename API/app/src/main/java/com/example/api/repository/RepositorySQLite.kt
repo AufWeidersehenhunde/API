@@ -25,8 +25,6 @@ class RepositorySQLite(
 
     suspend fun putInSort(statusApi: String, genderApi: String, speciesApi: String) = personDao.putInSort(statusApi, genderApi, speciesApi)
 
-    fun getPicture(uri: String) = personDao.getPicture(uri)
-
 
 }
 

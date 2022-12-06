@@ -19,15 +19,12 @@
         android:icon="@drawable/ic_baseline_sort_24"
         app:showAsAction="never"
         android:orderInCategory="100" />
-    <item
-        android:title="Reset sorting"
-        android:id="@+id/reset"
-        android:icon="@drawable/ic_baseline_sort_24"
-        app:showAsAction="never"
-        android:orderInCategory="100" />
+
     <item
         android:title="Exit"
         android:id="@+id/exit"
+        android:iconTintMode="multiply"
+        android:iconTint="@color/material_dynamic_primary60"
         android:icon="@drawable/ic_baseline_power_off"
         app:showAsAction="never"
         android:orderInCategory="100" />

@@ -37,6 +37,5 @@ interface PersonDao {
     @Query("SELECT*FROM persons WHERE status = :statusApi and gender = :genderApi and species = :speciesApi")
     suspend fun putInSort(statusApi: String, genderApi: String, speciesApi: String) : List<PersonDb>
 
-    @Query("SELECT*FROM persons WHERE image =:uri")
-    fun getPicture(uri: String):PersonDb
+
 }

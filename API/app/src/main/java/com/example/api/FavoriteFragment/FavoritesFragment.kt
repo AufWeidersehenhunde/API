@@ -26,7 +26,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         adapterFavorite = MyAdapterForFavorite { viewModelFavorite.delFavoritePerson(it.id)}
         with(viewBinding.recyclerViewFavorite) {
             layoutManager = GridLayoutManager(
-                context, 2
+                context, 1
             )
             adapter = adapterFavorite
         }
