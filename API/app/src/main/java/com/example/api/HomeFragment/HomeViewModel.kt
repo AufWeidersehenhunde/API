@@ -41,13 +41,23 @@ class HomeViewModel (
     fun routeToInfo(uuid:Int){
         router.navigateTo(Screens.getInfoFragment(uuid))
     }
-
+    fun back() {
+        router.navigateTo(Screens.getHomeFragment())
+    }
 
     fun delPerson(model:PersonDb) {
             viewModelScope.launch {
                 repositorySQLite.deletePerson(model)
             }
         }
+
+    fun toFavorite() {
+        router.navigateTo(Screens.getFavoriteFragment())
     }
+
+    fun goToSorting() {
+        router.navigateTo(Screens.getSortFragment())
+    }
+}
 
 

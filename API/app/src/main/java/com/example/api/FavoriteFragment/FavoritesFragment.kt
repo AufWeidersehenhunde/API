@@ -31,7 +31,11 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
             adapter = adapterFavorite
         }
         observeElement()
+        viewBinding.back.setOnClickListener {
+            viewModelFavorite.back()
+        }
     }
+
     private fun observeElement() {
         viewModelFavorite.listFavorite.onEach {
             adapterFavorite?.set(it)

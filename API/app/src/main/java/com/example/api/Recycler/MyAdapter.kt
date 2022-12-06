@@ -60,7 +60,7 @@ class MyAdapter(
                     addSome(character)
                     notifyDataSetChanged()
                 }
-                imageView.setOnClickListener {
+                recitem.setOnClickListener {
                     info(character)
                 }
             }

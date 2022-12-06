@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
+import androidx.core.graphics.rotationMatrix
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,6 +54,49 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             adapter = adapterHome
         }
 
+        viewBinding.back.setOnClickListener {
+            viewModelHome.back()
+        }
+
+
+        viewBinding.menu.setOnClickListener{
+            with(viewBinding){
+                btnFavorite.isVisible = !btnFavorite.isVisible
+                btnSorting.isVisible = !btnSorting.isVisible
+                btnExit.isVisible = !btnExit.isVisible
+
+                menu
+                    .animate()
+                    .rotation(
+                        if (btnExit.isVisible){
+                            90f
+                        } else {
+                            0f
+                        }
+                    )
+                    .setDuration(255L)
+                    .start()
+            }
+        }
+        viewBinding.btnSorting.setOnClickListener{
+            viewModelHome.goToSorting()
+        }
+
+
+        viewBinding.btnExit.setOnClickListener {
+            Toast.makeText(context, "Please,  вернись", Toast.LENGTH_LONG).show()
+            fun onDestroy() {
+                super.onDestroy();
+                System.runFinalizersOnExit(true);
+                System.exit(0);
+            }
+            onDestroy()
+        }
+
+        viewBinding.btnFavorite.setOnClickListener {
+            viewModelHome.toFavorite()
+        }
+
         if (!myStatus.isNullOrEmpty() || !myGender.isNullOrEmpty() || !mySpecies.isNullOrEmpty()) {
             viewModelHome.viewSortPersons(
                 myStatus.toString(),
@@ -60,8 +106,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }else {
             viewModelHome.observeAllPersons()
         }
-        viewBinding.button.visibility = View.INVISIBLE
-        viewBinding.textView.visibility = View.INVISIBLE
     }
     private fun observeElement() {
         viewModelHome._listCharacters.onEach {

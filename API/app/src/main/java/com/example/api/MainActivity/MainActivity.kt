@@ -34,28 +34,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.main_menu, menu)
-//        return true
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModelMain.create()
         setContentView(R.layout.activity_main)
-//        this.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         viewModelMain.getCharacters(1)
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            android.R.id.home -> viewModelMain.back()
-//            R.id.exit -> finish()
-//            R.id.myFavorite -> viewModelMain.favorite()
-//            R.id.sort -> viewModelMain.sort()
-//        }
-//        return true
-//    }
 
     override fun onResumeFragments() {
         super.onResumeFragments()

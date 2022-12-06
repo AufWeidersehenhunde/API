@@ -44,18 +44,6 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
     }
 
 
-    init {
-//        val bitmap = viewBinding.imageViewInfo.bitmap
-//        try {
-//            if (bitmap != null) {
-//                ContentProviderCompat.requireContext().saveBitmap("myFile.png", bitmap)
-//            }
-//        } catch (e: Exception) {
-//            Log.d("tags", "huevo_brat")
-//        }
-    }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val uuidForInfo = arguments?.getInt(DATA)
@@ -74,7 +62,9 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
                         statusInfo.setTextColor(Color.RED)
                     }
                 }
-
+                back.setOnClickListener {
+                    viewModelInfo.back()
+                }
                 fun genderColor() {
                     if (character.gender == "Male") {
                         genderInfo.setTextColor(Color.RED)
@@ -107,12 +97,8 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
                         .load(character.image)
                         .into(imageViewInfo)
                 }
-
-
-                btnSave.setOnClickListener {
-                    Toast.makeText(context, "Download started...", Toast.LENGTH_SHORT)
-                    val bitmap = imageViewInfo.drawable.toBitmap()
-                    viewModelInfo.saveImage(requireContext(), bitmap)
+                imageViewInfo.setOnClickListener {
+                    viewModelInfo.routeToDetail(character.id)
                 }
             }
         }

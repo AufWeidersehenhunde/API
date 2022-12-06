@@ -5,6 +5,7 @@ import com.example.api.FavoriteFragment.FavoritesFragment
 import com.example.api.HomeFragment.HomeFragment
 import com.example.api.InfoFragment.InfoFragment
 import com.example.api.SortFragment.SortFragment
+import com.example.api.detailFragment.DetailFragment
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 object Screens {
@@ -13,4 +14,5 @@ object Screens {
     fun getHomeFragment() = FragmentScreen { HomeFragment() }
     fun getFavoriteFragment() = FragmentScreen { FavoritesFragment() }
     fun getSortFragment() = FragmentScreen {SortFragment()}
+    fun getDetailFragment(uuid: Int) = FragmentScreen { DetailFragment.getInstance(uuid) }
 }

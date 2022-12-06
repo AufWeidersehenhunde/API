@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class FavoritesViewModel(
+class FavoritesViewModel(private val router: Router,
     private val repositorySQL: RepositorySQLite
 ) : ViewModel() {
     val listFavorite = MutableStateFlow<List<PersonDb>>(emptyList())
@@ -31,5 +31,10 @@ class FavoritesViewModel(
         viewModelScope.launch {
             repositorySQL.deleteFavoritePerson(uuid)
         }
+    }
+
+    fun back() {
+        //change navigate to to back to, some bug
+        router.navigateTo(Screens.getHomeFragment())
     }
 }

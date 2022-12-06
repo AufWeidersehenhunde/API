@@ -18,32 +18,15 @@ class MainActivityViewModel(
     private val repositorySQLite: RepositorySQLite,
     private val repositoryAPI: RepositoryAPI
 ) : ViewModel() {
-    val _listCharacters = MutableStateFlow<List<PersonDb>>(emptyList())
 
     fun getCharacters(page: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             val characters = repositoryAPI.getCharacters(page)
             repositorySQLite.insertAllData(characters.results)
-            _listCharacters.value = characters.results
         }
-    }
-    fun searching(){
-        viewModelScope.launch {
-        }
-    }
-    fun back() {
-        router.navigateTo(Screens.getHomeFragment())
     }
 
     fun create() {
         router.navigateTo(Screens.getHomeFragment())
-    }
-
-    fun favorite() {
-        router.navigateTo(Screens.getFavoriteFragment())
-    }
-
-    fun sort() {
-        router.navigateTo(Screens.getSortFragment())
     }
 }

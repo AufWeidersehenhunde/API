@@ -23,7 +23,7 @@ import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.scope.emptyState
 import java.io.File
 
- class InfoViewModel (
+ class InfoViewModel (private val router: Router,
     private val repositorySQLite: RepositorySQLite
 ): ViewModel() {
     val _listCharacters = MutableStateFlow<PersonDb?>(null)
@@ -34,8 +34,11 @@ import java.io.File
             _listCharacters.value = repositorySQLite.getInfo(uuid)
         }
     }
+     fun routeToDetail(uuid:Int){
+         router.navigateTo(Screens.getDetailFragment(uuid))
+     }
 
-     fun saveImage(context: Context, image: Bitmap){
-        insertImage(context.contentResolver, image, "name", "name")
+     fun back() {
+         router.navigateTo(Screens.getHomeFragment())
      }
  }

@@ -24,20 +24,22 @@
             android:layout_height="24dp"
             android:background="@drawable/ic_baseline_west_24" />
 
-        <View
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_gravity="end"
             android:id="@+id/menu"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="333dp"
-            android:background="@drawable/ic_baseline_menu_1" />
+            android:layout_width="48dp"
+            android:layout_height="48dp">
 
-        <View
-            android:id="@+id/menu2"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="333dp"
-            android:background="@drawable/ic_baseline_menu_open_2"
-            android:visibility="invisible" />
+            <View
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_baseline_menu_1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -57,25 +59,45 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:spanCount="2" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="208dp"
-        android:layout_height="68dp"
-        android:layout_marginTop="288dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
+    <TextView
+        android:id="@+id/btnFavorite"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="My favourites"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:background="@color/nigga_boy"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/btnSorting"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="Sorting"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:background="@color/nigga_boy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFavorite" />
+
+    <TextView
+        android:id="@+id/btnExit"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="Exit"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:background="@color/nigga_boy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSorting" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
