@@ -14,6 +14,27 @@
         app:layout_constraintTop_toTopOf="parent"
         >
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_gravity="center"
+            android:id="@+id/menu"
+            android:layout_width="250dp"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/nameOfPerson"
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:gravity="center"
+                android:text="Keqing"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
             android:id="@+id/back"
@@ -25,22 +46,33 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/imageViewInfo"
-        android:layout_width="match_parent"
-        android:layout_height="370dp"
-        android:layout_marginEnd="1dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewForInfo"
+        android:layout_width="384dp"
+        android:layout_height="388dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginEnd="11dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.1"
+        app:spanCount="1" />
+
 
     <TextView
         android:id="@+id/speciesInfo"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="48dp"
         android:gravity="center"
         android:textSize="20sp"
+        android:background="@drawable/kvadrat"
+        android:backgroundTint="@color/nigga_boy"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/statusInfo" />
 
@@ -48,10 +80,13 @@
         android:id="@+id/statusInfo"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="48dp"
         android:gravity="center"
         android:textSize="20sp"
+        android:background="@drawable/kvadrat"
+        android:backgroundTint="@color/nigga_boy"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/genderInfo" />
 
@@ -59,25 +94,15 @@
         android:id="@+id/genderInfo"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="48dp"
         android:gravity="center"
         android:textSize="20sp"
+        android:background="@drawable/kvadrat"
+        android:backgroundTint="@color/nigga_boy"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameInfo" />
-
-    <TextView
-        android:id="@+id/nameInfo"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
-        android:gravity="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewInfo" />
-
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewForInfo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

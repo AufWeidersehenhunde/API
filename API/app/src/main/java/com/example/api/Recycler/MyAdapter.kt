@@ -5,8 +5,10 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.example.api.databinding.RecyclerItemBinding
 import com.example.api.DBandprovider.PersonDb
@@ -33,12 +35,12 @@ class MyAdapter(
                 val listColor =
                     arrayOf(Color.RED, Color.BLUE, Color.BLACK)
                 if (character.status == "Dead") {
-                    recitem.setBackgroundColor(listColor[2])
+                    recitemParent.setBackgroundColor(listColor[2])
                 } else if(character.status == "Alive") {
-                    recitem.setBackgroundColor(listColor[1])
+                    recitemParent.setBackgroundColor(listColor[1])
                 }
                 else if (character.status == "unknown") {
-                    recitem.setBackgroundColor(listColor[0])
+                    recitemParent.setBackgroundColor(listColor[0])
                 }
                 nameText.text = character.name
                 genderText.text = character.gender
@@ -68,6 +70,7 @@ class MyAdapter(
         }
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemBinding =
             RecyclerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -76,7 +79,6 @@ class MyAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(item[position])
-
     }
 
     override fun getItemCount(): Int {

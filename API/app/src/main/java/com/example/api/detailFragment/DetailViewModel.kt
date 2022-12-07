@@ -16,7 +16,8 @@ import kotlinx.coroutines.launch
 class DetailViewModel (private val router: Router,
                        private val repositorySQLite: RepositorySQLite
 ): ViewModel() {
-    val _listCharacters = MutableStateFlow<PersonDb?>(null)
+    private val _listCharacters = MutableStateFlow<PersonDb?>(null)
+    val listCharacters : MutableStateFlow<PersonDb?> = _listCharacters
 
     fun saveImage(context: Context, image: Bitmap){
         MediaStore.Images.Media.insertImage(context.contentResolver, image, "name", "name")

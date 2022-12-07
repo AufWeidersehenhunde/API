@@ -26,10 +26,12 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private val viewModelDetail: DetailViewModel by viewModel()
 
     companion object {
-        private const val pic = "UUID"
-        fun getInstance(data: Int) = DetailFragment().apply {
+        private const val UUID = "UUID"
+        private const val IMAGE = "IMAGE"
+        fun getInstance(image: String, uuid: Int) = DetailFragment().apply {
             arguments = Bundle().apply {
-                putInt(pic, data)
+                putInt(UUID, uuid)
+                putString(IMAGE, image)
             }
         }
     }
@@ -37,13 +39,14 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val uuidForDetail = arguments?.getInt(DetailFragment.pic)
+        val uuidForDetail = arguments?.getInt(UUID)
+        val image = arguments?.getString(IMAGE)
         if (uuidForDetail != null) {
             viewModelDetail.getDetailFragment(uuidForDetail.toInt())
         }
         fun bind(character: PersonDb) {
             viewBinding.apply {
-                if (character.image == null) {
+                if (image == null) {
                     Glide.with(imageViewDetail.context)
                         .load(R.drawable.ic_baseline_power_off)
                         .into(imageViewDetail)
@@ -62,12 +65,12 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             viewBinding.back.setOnClickListener {
                 viewModelDetail.back()
             }
-
-
+            viewBinding.nameOfPerson.text = character.name
         }
+
         fun observeElemento() {
             viewLifecycleOwner.lifecycleScope.launch {
-                viewModelDetail._listCharacters.filterNotNull().collect {
+                viewModelDetail.listCharacters.filterNotNull().collect {
                     bind(it)
                 }
             }

@@ -11,10 +11,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class FavoritesViewModel(private val router: Router,
+class FavoritesViewModel(
+    private val router: Router,
     private val repositorySQL: RepositorySQLite
 ) : ViewModel() {
-    val listFavorite = MutableStateFlow<List<PersonDb>>(emptyList())
+    private val _listFavorite = MutableStateFlow<List<PersonDb>>(emptyList())
+    val listFavorite: MutableStateFlow<List<PersonDb>> = _listFavorite
 
 
     init {
@@ -23,7 +25,9 @@ class FavoritesViewModel(private val router: Router,
 
     private fun getCharactersFavorite() {
         viewModelScope.launch(Dispatchers.IO) {
-            listFavorite.value = repositorySQL.getAllFavoriteData()
+            _listFavorite.value = repositorySQL.getAllFavoriteData()
+            if (_listFavorite.value != listFavorite.value) {
+            }
         }
     }
 
@@ -37,4 +41,5 @@ class FavoritesViewModel(private val router: Router,
         //change navigate to to back to, some bug
         router.navigateTo(Screens.getHomeFragment())
     }
+
 }

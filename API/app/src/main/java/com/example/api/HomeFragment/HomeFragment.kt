@@ -5,7 +5,9 @@ import android.view.Menu
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.graphics.rotationMatrix
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,11 +17,13 @@ import com.example.api.Recycler.MyAdapter
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.api.R
 import com.example.api.databinding.FragmentHomeBinding
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextListener {
     private var adapterHome: MyAdapter? = null
     private val viewBinding: FragmentHomeBinding by viewBinding()
     private val viewModelHome: HomeViewModel by viewModel()
@@ -82,6 +86,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             viewModelHome.goToSorting()
         }
 
+        viewBinding.searchView.setOnQueryTextListener(this@HomeFragment)
 
         viewBinding.btnExit.setOnClickListener {
             Toast.makeText(context, "Please,  вернись", Toast.LENGTH_LONG).show()
@@ -108,10 +113,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
     private fun observeElement() {
-        viewModelHome._listCharacters.onEach {
+        viewModelHome.listCharacters.onEach {
             adapterHome?.set(it)
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        if (!newText.isNullOrEmpty())
+            viewModelHome.searchAny("%$newText%")
+        return true
     }
 
 }

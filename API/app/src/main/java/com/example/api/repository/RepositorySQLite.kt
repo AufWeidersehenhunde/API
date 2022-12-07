@@ -25,6 +25,7 @@ class RepositorySQLite(
 
     suspend fun putInSort(statusApi: String, genderApi: String, speciesApi: String) = personDao.putInSort(statusApi, genderApi, speciesApi)
 
+    suspend fun putInSearch(any: String): List<PersonDb>  = personDao.putInSearch(any)
 
 }
 

@@ -23,14 +23,14 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapterFavorite = MyAdapterForFavorite { viewModelFavorite.delFavoritePerson(it.id)}
+        observeElement()
+        adapterFavorite = MyAdapterForFavorite { viewModelFavorite.delFavoritePerson(it.id) }
         with(viewBinding.recyclerViewFavorite) {
             layoutManager = GridLayoutManager(
                 context, 1
             )
             adapter = adapterFavorite
         }
-        observeElement()
         viewBinding.back.setOnClickListener {
             viewModelFavorite.back()
         }

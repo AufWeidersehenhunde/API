@@ -17,6 +17,7 @@ import com.example.api.repository.RepositorySQLite
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -26,16 +27,24 @@ import java.io.File
  class InfoViewModel (private val router: Router,
     private val repositorySQLite: RepositorySQLite
 ): ViewModel() {
-    val _listCharacters = MutableStateFlow<PersonDb?>(null)
-
+    private val _listCharacters = MutableStateFlow<PersonDb?>(null)
+     val listCharacters : MutableStateFlow<PersonDb?> = _listCharacters
+     val listInfo = MutableStateFlow<List<PersonDb>>(emptyList())
 
     fun getInfoFragment(uuid: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             _listCharacters.value = repositorySQLite.getInfo(uuid)
         }
     }
-     fun routeToDetail(uuid:Int){
-         router.navigateTo(Screens.getDetailFragment(uuid))
+     fun takePersonsImage(){
+         viewModelScope.launch {
+             repositorySQLite.getAllSomethingData().collect{
+                 listInfo.value = it
+             }
+         }
+     }
+     fun routeToDetail(image: String, uuid:Int){
+         router.navigateTo(Screens.getDetailFragment(image, uuid))
      }
 
      fun back() {

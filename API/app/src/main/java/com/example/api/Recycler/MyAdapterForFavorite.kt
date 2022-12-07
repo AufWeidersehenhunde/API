@@ -8,7 +8,8 @@ import com.bumptech.glide.Glide
 import com.example.api.DBandprovider.PersonDb
 import com.example.api.databinding.RecyclerItemBinding
 
-class MyAdapterForFavorite (private val remove:(PersonDb) -> Unit): RecyclerView.Adapter<MyAdapterForFavorite.MyViewHolder>() {
+class MyAdapterForFavorite(private val remove: (PersonDb) -> Unit) :
+    RecyclerView.Adapter<MyAdapterForFavorite.MyViewHolder>() {
 
     var item: MutableList<PersonDb> = mutableListOf()
     fun set(items: List<PersonDb>) {

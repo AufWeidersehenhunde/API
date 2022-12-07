@@ -24,11 +24,27 @@
             android:layout_height="24dp"
             android:background="@drawable/ic_baseline_west_24" />
 
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/search"
+            android:layout_width="320dp"
+            android:layout_height="40dp">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_gravity="end"
             android:id="@+id/menu"
             android:layout_width="48dp"
             android:layout_height="48dp">
+
 
             <View
                 android:layout_width="24dp"
@@ -55,7 +71,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:spanCount="2" />
 
