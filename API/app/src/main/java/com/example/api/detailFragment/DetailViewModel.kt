@@ -30,7 +30,7 @@ class DetailViewModel (private val router: Router,
     }
 
     fun back() {
-        router.navigateTo(Screens.getHomeFragment())
+        router.newRootScreen(Screens.getHomeFragment())
     }
 
 }

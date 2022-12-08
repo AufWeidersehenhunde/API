@@ -1,15 +1,13 @@
 package com.example.api.SortFragment
 
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
-import androidx.core.view.isInvisible
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.api.HomeFragment.HomeViewModel
 import com.example.api.R
-import com.example.api.Recycler.MyAdapter
-import com.example.api.databinding.FragmentHomeBinding
 import com.example.api.databinding.FragmentSortBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -47,6 +45,10 @@ class SortFragment : Fragment(R.layout.fragment_sort) {
             speciesAlien.setOnClickListener {
                 speciesApi = "Alien"
             }
+
+            statusTxt.background.setColorFilter(Color.parseColor("#B2634BE6"), PorterDuff.Mode.SRC_ATOP)
+            genderTxt.background.setColorFilter(Color.parseColor("#B24CDA6B"), PorterDuff.Mode.SRC_ATOP)
+            speciesTxt.background.setColorFilter(Color.parseColor("#B2DAA64C"), PorterDuff.Mode.SRC_ATOP)
             btnAcceptSort.setOnClickListener {
                 if(statusApi == "All"|| genderApi=="All"|| speciesApi=="All"){
                     Toast.makeText(context,"Choose some shit, bro", Toast.LENGTH_LONG).show()

@@ -20,7 +20,7 @@
             android:layout_width="250dp"
             android:layout_height="40dp">
     <TextView
-        android:id="@+id/nameOfPerson"
+        android:id="@+id/nameOfPersons"
         android:layout_width="250dp"
         android:layout_height="30dp"
         android:fontFamily="sans-serif-condensed-medium"

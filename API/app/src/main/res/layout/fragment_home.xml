@@ -7,11 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragment.HomeFragment">
 
+    <TextView
+        android:id="@+id/nameOfPersons"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:gravity="center"
+        android:text="Rick and Morty"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="408dp"
         android:layout_height="55dp"
-        android:background="@color/nigga_boy"
+        android:background="#40B586EA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,6 +52,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -72,45 +88,49 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:spanCount="2" />
-
+        app:spanCount="1" />
 
     <TextView
         android:id="@+id/btnFavorite"
-        android:layout_width="120dp"
-        android:layout_height="45dp"
+        android:layout_width="140dp"
+        android:layout_height="55dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_corners"
         android:gravity="center"
+        android:padding="10dp"
         android:text="My favourites"
         android:textSize="16sp"
         android:visibility="gone"
-        android:background="@color/nigga_boy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/btnSorting"
-        android:layout_width="120dp"
-        android:layout_height="45dp"
+        android:layout_width="140dp"
+        android:layout_height="55dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_corners"
         android:gravity="center"
         android:text="Sorting"
         android:textSize="16sp"
         android:visibility="gone"
-        android:background="@color/nigga_boy"
+        android:padding="10dp"
+        android:layout_marginTop="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnFavorite" />
 
     <TextView
         android:id="@+id/btnExit"
-        android:layout_width="120dp"
-        android:layout_height="45dp"
+        android:layout_width="140dp"
+        android:layout_height="55dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_corners"
         android:gravity="center"
         android:text="Exit"
+        android:layout_marginTop="2dp"
         android:textSize="16sp"
         android:visibility="gone"
-        android:background="@color/nigga_boy"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSorting" />
 

@@ -1,22 +1,16 @@
 package com.example.api.detailFragment
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.example.api.DBandprovider.PersonDb
-import com.example.api.InfoFragment.InfoFragment
-import com.example.api.InfoFragment.InfoViewModel
 import com.example.api.R
 import com.example.api.databinding.FragmentDetailBinding
-import com.example.api.databinding.FragmentInfoBinding
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -65,10 +59,10 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             viewBinding.back.setOnClickListener {
                 viewModelDetail.back()
             }
-            viewBinding.nameOfPerson.text = character.name
+            viewBinding.nameOfPersons.text = character.name
         }
 
-        fun observeElemento() {
+        fun observeElement() {
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModelDetail.listCharacters.filterNotNull().collect {
                     bind(it)
@@ -76,6 +70,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             }
 
         }
-        observeElemento()
+        observeElement()
     }
 }

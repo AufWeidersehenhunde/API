@@ -1,7 +1,6 @@
 package com.example.api.FavoriteFragment
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.lifecycle.lifecycleScope

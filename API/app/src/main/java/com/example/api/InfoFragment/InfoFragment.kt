@@ -1,37 +1,21 @@
 package com.example.api.InfoFragment
 
-import android.app.Application
-import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
-import android.provider.ContactsContract.Intents.Insert
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.HorizontalScrollView
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat
-import androidx.core.content.ContentResolverCompat
-import androidx.core.content.contentValuesOf
-import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.bumptech.glide.Glide
 import com.example.api.DBandprovider.PersonDb
 import com.example.api.R
-import com.example.api.Recycler.MyAdapter
 import com.example.api.Recycler.MyAdapterForInfo
 import com.example.api.databinding.FragmentInfoBinding
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.scope.Scope
-import java.io.File
-import java.io.IOException
 
 
 class InfoFragment : Fragment(R.layout.fragment_info) {
@@ -71,11 +55,11 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
             viewBinding.apply {
                 fun statusColor() {
                     if (character.status == "Alive") {
-                        statusInfo.setTextColor(Color.GREEN)
+                        statusInfo.setTextColor(Color.parseColor("#8A4FC922"))
                     } else if (character.status == "unknown") {
-                        statusInfo.setTextColor(Color.CYAN)
+                        statusInfo.setTextColor(Color.parseColor("#8A181A18"))
                     } else {
-                        statusInfo.setTextColor(Color.RED)
+                        statusInfo.setTextColor(Color.parseColor("#B7D83F3F"))
                     }
                 }
                 back.setOnClickListener {
@@ -83,17 +67,17 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
                 }
                 fun genderColor() {
                     if (character.gender == "Male") {
-                        genderInfo.setTextColor(Color.RED)
+                        genderInfo.setTextColor(Color.parseColor("#B7D83F3F"))
                     } else {
-                        genderInfo.setTextColor(Color.BLUE)
+                        genderInfo.setTextColor(Color.parseColor("#99429DE6"))
                     }
                 }
 
                 fun speciesColor() {
                     if (character.species == "Human") {
-                        speciesInfo.setTextColor(Color.YELLOW)
+                        speciesInfo.setTextColor(Color.parseColor("#8AB64EB6"))
                     } else {
-                        speciesInfo.setTextColor(Color.MAGENTA)
+                        speciesInfo.setTextColor(Color.parseColor("#8A9AB64E"))
                     }
                 }
                 genderColor()
@@ -103,7 +87,7 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
                 speciesColor()
                 speciesInfo.text = "Species: ${character.species}"
 
-                nameOfPerson.text = character.name
+                nameOfPersons.text = character.name
             }
         }
 

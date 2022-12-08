@@ -1,26 +1,21 @@
 package com.example.api.HomeFragment
 
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
-import android.view.Menu
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.graphics.rotationMatrix
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import by.kirich1409.viewbindingdelegate.internal.findRootView
 import com.example.api.Recycler.MyAdapter
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.api.R
 import com.example.api.databinding.FragmentHomeBinding
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextListener {
@@ -68,7 +63,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
                 btnFavorite.isVisible = !btnFavorite.isVisible
                 btnSorting.isVisible = !btnSorting.isVisible
                 btnExit.isVisible = !btnExit.isVisible
-
+                if (btnExit.visibility == View.VISIBLE){
+                    btnExit.background.setColorFilter(Color.parseColor("#99C62C20"), PorterDuff.Mode.SRC_ATOP)
+                }
                 menu
                     .animate()
                     .rotation(

@@ -1,6 +1,5 @@
 package com.example.api.daos
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -17,7 +16,7 @@ interface PersonDao {
     fun getAllSomethingData(): Flow<List<PersonDb>>
 
     @Query("SELECT * FROM persons WHERE isFavorite = 1")
-    fun getAllFavoriteData(): List<PersonDb>
+    fun getAllFavoriteData(): Flow<List<PersonDb>>
 
     @Query("UPDATE persons SET isFavorite = 1 WHERE id =:uuid ")
     suspend fun putInFavorite(uuid: Int)

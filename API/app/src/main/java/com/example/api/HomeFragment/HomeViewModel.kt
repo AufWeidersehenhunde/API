@@ -1,14 +1,11 @@
 package com.example.api.HomeFragment
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import com.example.api.repository.RepositorySQLite
 import com.example.api.DBandprovider.PersonDb
-import com.example.api.Retrofit.RepositoryAPI
 import com.example.api.Screens
 import com.github.terrakok.cicerone.Router
-import kotlinx.coroutines.Delay
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -25,6 +22,10 @@ class HomeViewModel (
         viewModelScope.launch {
             _listCharacters.value = repositorySQLite.putInSearch(any)
         }
+    }
+
+    init {
+        observeAllPersons()
     }
 
     fun viewSortPersons(statusApi:String,genderApi:String,speciesApi:String){

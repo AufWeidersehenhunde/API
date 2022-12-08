@@ -1,17 +1,13 @@
 package com.example.api.Recycler
 
-
-import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
-import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
-import com.example.api.databinding.RecyclerItemBinding
 import com.example.api.DBandprovider.PersonDb
+import com.example.api.databinding.RecyclerItemBinding
 
 
 class MyAdapter(
@@ -20,7 +16,6 @@ class MyAdapter(
     private val info: (PersonDb) -> Unit
 ) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
-
     var item: List<PersonDb> = listOf()
     fun set(items: List<PersonDb>) {
         this.item = items
@@ -32,15 +27,13 @@ class MyAdapter(
         private val binding = itemBinding
         fun bind(character: PersonDb) {
             binding.apply {
-                val listColor =
-                    arrayOf(Color.RED, Color.BLUE, Color.BLACK)
                 if (character.status == "Dead") {
-                    recitemParent.setBackgroundColor(listColor[2])
+                    recitem.background.setColorFilter(Color.parseColor("#99F3EDED"), PorterDuff.Mode.SRC_ATOP)
                 } else if(character.status == "Alive") {
-                    recitemParent.setBackgroundColor(listColor[1])
+                    recitem.background.setColorFilter(Color.parseColor("#99429DE6"), PorterDuff.Mode.SRC_ATOP)
                 }
                 else if (character.status == "unknown") {
-                    recitemParent.setBackgroundColor(listColor[0])
+                    recitem.background.setColorFilter(Color.parseColor("#99C62C20"), PorterDuff.Mode.SRC_ATOP)
                 }
                 nameText.text = character.name
                 genderText.text = character.gender
