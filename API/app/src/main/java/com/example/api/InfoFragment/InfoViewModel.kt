@@ -16,25 +16,18 @@ import kotlinx.coroutines.launch
 ): ViewModel() {
     private val _listCharacters = MutableStateFlow<PersonDb?>(null)
      val listCharacters : MutableStateFlow<PersonDb?> = _listCharacters
-     val listInfo = MutableStateFlow<List<PersonDb>>(emptyList())
 
     fun getInfoFragment(uuid: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             _listCharacters.value = repositorySQLite.getInfo(uuid)
         }
     }
-     fun takePersonsImage(){
-         viewModelScope.launch {
-             repositorySQLite.getAllSomethingData().collect{
-                 listInfo.value = it
-             }
-         }
-     }
+
      fun routeToDetail(image: String, uuid:Int){
          router.navigateTo(Screens.getDetailFragment(image, uuid))
      }
 
      fun back() {
-         router.newRootScreen(Screens.getHomeFragment())
+         router.navigateTo(Screens.getHomeFragment())
      }
  }

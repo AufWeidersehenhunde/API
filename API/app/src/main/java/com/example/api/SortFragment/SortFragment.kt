@@ -17,12 +17,15 @@ class SortFragment : Fragment(R.layout.fragment_sort) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
+    }
+    private fun initView(){
         viewBinding.btnCancelSort.setOnClickListener {
             viewModelSort.goBack()
         }
-        var statusApi = "All"
-        var genderApi = "All"
-        var speciesApi = "All"
+        var statusApi: String? = null
+        var genderApi: String? = null
+        var speciesApi: String? = null
         with(viewBinding) {
             statusAlive.setOnClickListener {
                 statusApi = "Alive"
@@ -50,10 +53,10 @@ class SortFragment : Fragment(R.layout.fragment_sort) {
             genderTxt.background.setColorFilter(Color.parseColor("#B24CDA6B"), PorterDuff.Mode.SRC_ATOP)
             speciesTxt.background.setColorFilter(Color.parseColor("#B2DAA64C"), PorterDuff.Mode.SRC_ATOP)
             btnAcceptSort.setOnClickListener {
-                if(statusApi == "All"|| genderApi=="All"|| speciesApi=="All"){
-                    Toast.makeText(context,"Choose some shit, bro", Toast.LENGTH_LONG).show()
+                if(statusApi == null|| genderApi==null|| speciesApi==null){
+                    Toast.makeText(context,"Choose some more, bro", Toast.LENGTH_LONG).show()
                 }else {
-                    viewModelSort.routeToBundle(statusApi, genderApi, speciesApi)
+                    viewModelSort.routeToBundle(statusApi!!, genderApi!!, speciesApi!!)
                 }
             }
         }

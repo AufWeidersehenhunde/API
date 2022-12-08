@@ -29,8 +29,7 @@
         android:background="#40B586EA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <View
@@ -56,10 +55,10 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_gravity="end"
             android:id="@+id/menu"
             android:layout_width="48dp"
-            android:layout_height="48dp">
+            android:layout_height="48dp"
+            android:layout_gravity="end">
 
 
             <View
@@ -71,7 +70,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -90,49 +88,59 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:spanCount="1" />
 
-    <TextView
-        android:id="@+id/btnFavorite"
+    <androidx.cardview.widget.CardView
         android:layout_width="140dp"
-        android:layout_height="55dp"
+        android:layout_height="170dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/rounded_corners"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="My favourites"
-        android:textSize="16sp"
+        android:id="@+id/containerMenu"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        android:padding="10dp"
+        android:layout_marginStart="239dp"
+        app:layout_constraintStart_toStartOf="@+id/recyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-    <TextView
-        android:id="@+id/btnSorting"
-        android:layout_width="140dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/rounded_corners"
-        android:gravity="center"
-        android:text="Sorting"
-        android:textSize="16sp"
-        android:visibility="gone"
-        android:padding="10dp"
-        android:layout_marginTop="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFavorite" />
+        <TextView
+            android:id="@+id/btnFavorite"
+            android:layout_width="140dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_corners"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="My favourites"
+            android:textSize="16sp"
 
-    <TextView
-        android:id="@+id/btnExit"
-        android:layout_width="140dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/rounded_corners"
-        android:gravity="center"
-        android:text="Exit"
-        android:layout_marginTop="2dp"
-        android:textSize="16sp"
-        android:visibility="gone"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSorting" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <TextView
+            android:id="@+id/btnSorting"
+            android:layout_width="140dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="57dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_corners"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Sorting"
+            android:textSize="16sp"
+
+            app:layout_constraintTop_toBottomOf="@+id/btnFavorite" />
+
+        <TextView
+            android:id="@+id/btnExit"
+            android:layout_width="140dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="112dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_corners"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Exit"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnSorting" />
+
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

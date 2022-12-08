@@ -16,14 +16,13 @@ class FavoritesViewModel(
     private val _listFavorite = MutableStateFlow<List<PersonDb>>(emptyList())
     val listFavorite: MutableStateFlow<List<PersonDb>> = _listFavorite
 
-
     init {
-        getCharactersFavorite()
+        observeCharactersFavorite()
     }
 
-    private fun getCharactersFavorite() {
+    private fun observeCharactersFavorite() {
         viewModelScope.launch {
-            repositorySQL.getAllFavoriteData().collect{
+            repositorySQL.observeAllFavoriteData().collect{
                 _listFavorite.value = it
             }
         }
@@ -36,8 +35,6 @@ class FavoritesViewModel(
     }
 
     fun back() {
-        //change navigate to to back to, some bug
         router.newRootScreen(Screens.getHomeFragment())
     }
-
 }

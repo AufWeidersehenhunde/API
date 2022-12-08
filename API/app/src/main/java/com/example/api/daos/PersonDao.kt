@@ -13,10 +13,10 @@ import kotlinx.coroutines.flow.Flow
 interface PersonDao {
 
     @Query("SELECT * FROM persons")
-    fun getAllSomethingData(): Flow<List<PersonDb>>
+    fun observeAllSomethingData(): Flow<List<PersonDb>>
 
     @Query("SELECT * FROM persons WHERE isFavorite = 1")
-    fun getAllFavoriteData(): Flow<List<PersonDb>>
+    fun observeAllFavoriteData(): Flow<List<PersonDb>>
 
     @Query("UPDATE persons SET isFavorite = 1 WHERE id =:uuid ")
     suspend fun putInFavorite(uuid: Int)

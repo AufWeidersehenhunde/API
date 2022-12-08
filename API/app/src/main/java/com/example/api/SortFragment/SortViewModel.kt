@@ -9,11 +9,10 @@ class SortViewModel (
 ): ViewModel(){
 
     fun goBack(){
-        //change navigate to to back to, some bug
-        router.navigateTo(Screens.getHomeFragment())
+        router.newRootScreen(Screens.getHomeFragment())
     }
     fun routeToBundle(statusApi:String,genderApi:String,speciesApi:String) {
-        router.navigateTo(Screens.getHomeSortFragment(statusApi,genderApi, speciesApi))
+        router.newRootScreen(Screens.getHomeSortFragment(statusApi,genderApi, speciesApi))
     }
 
 

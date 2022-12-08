@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.api.Recycler.MyAdapterForFavorite
 import com.example.api.R
@@ -25,8 +26,8 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         observeElement()
         adapterFavorite = MyAdapterForFavorite { viewModelFavorite.delFavoritePerson(it.id) }
         with(viewBinding.recyclerViewFavorite) {
-            layoutManager = GridLayoutManager(
-                context, 1
+            layoutManager = LinearLayoutManager(
+                context, LinearLayoutManager.VERTICAL, false
             )
             adapter = adapterFavorite
         }

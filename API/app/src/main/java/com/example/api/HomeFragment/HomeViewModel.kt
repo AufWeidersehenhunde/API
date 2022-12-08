@@ -24,16 +24,12 @@ class HomeViewModel (
         }
     }
 
-    init {
-        observeAllPersons()
-    }
-
     fun viewSortPersons(statusApi:String,genderApi:String,speciesApi:String){
         viewModelScope.launch (Dispatchers.IO){
            _listCharacters.value = repositorySQLite.putInSort(statusApi,genderApi,speciesApi)
         }
     }
-    fun getItFavorite(uuid:Int) {
+    fun putInFavorite(uuid:Int) {
         viewModelScope.launch(Dispatchers.IO) {
            repositorySQLite.putInFavorite(uuid)
         }
@@ -41,16 +37,16 @@ class HomeViewModel (
 
     fun observeAllPersons()  {
         viewModelScope.launch {
-            repositorySQLite.getAllSomethingData().collect{
+            repositorySQLite.observeAllSomethingData().collect{
                 _listCharacters.value = it
             }
         }
     }
     fun routeToInfo(uuid:Int){
-        router.navigateTo(Screens.getInfoFragment(uuid))
+        router.newRootScreen(Screens.getInfoFragment(uuid))
     }
     fun back() {
-        router.navigateTo(Screens.getHomeFragment())
+        router.newRootScreen(Screens.getHomeFragment())
     }
 
     fun delPerson(model:PersonDb) {
@@ -60,11 +56,11 @@ class HomeViewModel (
         }
 
     fun toFavorite() {
-        router.navigateTo(Screens.getFavoriteFragment())
+        router.newRootScreen(Screens.getFavoriteFragment())
     }
 
     fun goToSorting() {
-        router.navigateTo(Screens.getSortFragment())
+        router.newRootScreen(Screens.getSortFragment())
     }
 }
 

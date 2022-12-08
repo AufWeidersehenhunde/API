@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         viewModelMain.create()
         setContentView(R.layout.activity_main)
-        viewModelMain.getCharacters(1)
+        viewModelMain.observeCharacters(1)
     }
 
 

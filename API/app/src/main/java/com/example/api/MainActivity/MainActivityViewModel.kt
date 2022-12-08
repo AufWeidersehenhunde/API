@@ -16,7 +16,7 @@ class MainActivityViewModel(
     private val repositoryAPI: RepositoryAPI
 ) : ViewModel() {
 
-    fun getCharacters(page: Int) {
+    fun observeCharacters(page: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             val characters = repositoryAPI.getCharacters(page)
             repositorySQLite.insertAllData(characters.results)

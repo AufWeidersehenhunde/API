@@ -23,28 +23,33 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
     private val viewBinding: FragmentHomeBinding by viewBinding()
     private val viewModelHome: HomeViewModel by viewModel()
     companion object {
-        private const val DATA = "status"
+        private const val STATUS = "status"
         private const val GENDER = "gender"
         private const val SPECIES = "species"
         fun getInstance(statusApi: String,genderApi:String,speciesApi:String) = HomeFragment().apply {
             arguments = Bundle().apply {
-                putString(DATA, statusApi)
+                putString(STATUS, statusApi)
                 putString(GENDER, genderApi)
                 putString(SPECIES, speciesApi)
-                println("ikzgf$statusApi,gen$genderApi,hen$speciesApi")
             }
         }
     }
 
+    private fun initObservers(){
+        observeElement()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val myStatus = arguments?.getString(DATA)
-        val myGender = arguments?.getString(GENDER)
-        val mySpecies = arguments?.getString(SPECIES)
+        initView()
+        initObservers()
+        initViewSort()
+    }
 
-        observeElement()
-        adapterHome =
-            MyAdapter({ viewModelHome.delPerson(it) }, { viewModelHome.getItFavorite(it.id) }, {viewModelHome.routeToInfo(it.id)})
+    private fun initView(){
+
+        this.adapterHome =
+            MyAdapter({ viewModelHome.delPerson(it) }, { viewModelHome.putInFavorite(it.id) }, {viewModelHome.routeToInfo(it.id)})
 
         with(viewBinding.recyclerView) {
             layoutManager = LinearLayoutManager(
@@ -57,12 +62,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
             viewModelHome.back()
         }
 
-
         viewBinding.menu.setOnClickListener{
             with(viewBinding){
-                btnFavorite.isVisible = !btnFavorite.isVisible
-                btnSorting.isVisible = !btnSorting.isVisible
-                btnExit.isVisible = !btnExit.isVisible
+                containerMenu.isVisible = !containerMenu.isVisible
                 if (btnExit.visibility == View.VISIBLE){
                     btnExit.background.setColorFilter(Color.parseColor("#99C62C20"), PorterDuff.Mode.SRC_ATOP)
                 }
@@ -98,7 +100,12 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         viewBinding.btnFavorite.setOnClickListener {
             viewModelHome.toFavorite()
         }
+    }
 
+    private fun initViewSort(){
+        val myStatus = arguments?.getString(STATUS)
+        val myGender = arguments?.getString(GENDER)
+        val mySpecies = arguments?.getString(SPECIES)
         if (!myStatus.isNullOrEmpty() || !myGender.isNullOrEmpty() || !mySpecies.isNullOrEmpty()) {
             viewModelHome.viewSortPersons(
                 myStatus.toString(),
@@ -109,11 +116,11 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
             viewModelHome.observeAllPersons()
         }
     }
+
     private fun observeElement() {
         viewModelHome.listCharacters.onEach {
             adapterHome?.set(it)
         }.launchIn(viewLifecycleOwner.lifecycleScope)
-
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -125,5 +132,4 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
             viewModelHome.searchAny("%$newText%")
         return true
     }
-
 }

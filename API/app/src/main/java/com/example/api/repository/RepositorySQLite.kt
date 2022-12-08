@@ -9,9 +9,9 @@ class RepositorySQLite(
     private val personDao: PersonDao
 ) {
 
-    fun getAllSomethingData() = personDao.getAllSomethingData()
+    fun observeAllSomethingData() = personDao.observeAllSomethingData()
 
-    fun getAllFavoriteData() = personDao.getAllFavoriteData()
+    fun observeAllFavoriteData() = personDao.observeAllFavoriteData()
 
     fun insertAllData(list: List<PersonDb>) = personDao.insertAllData(list)
 

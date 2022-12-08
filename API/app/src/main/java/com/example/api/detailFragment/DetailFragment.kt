@@ -50,7 +50,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                         .into(imageViewDetail)
                 }
             }
-
             viewBinding.btnSave.setOnClickListener {
                 Toast.makeText(context, "Download started...", Toast.LENGTH_SHORT).show()
                 val bitmap = viewBinding.imageViewDetail.drawable.toBitmap()
@@ -68,8 +67,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     bind(it)
                 }
             }
-
         }
         observeElement()
     }
 }
+
