@@ -1,51 +1,71 @@
 package com.example.api.Recycler
 
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.api.Character1
-import com.example.api.CharacterList
-import com.example.api.R
-
+import com.example.api.DBandprovider.PersonDb
 import com.example.api.databinding.RecyclerItemBinding
-import retrofit2.Response
 
 
-class MyAdapter (private val delet:(Character1) -> Unit,private val addSome:(Character1) -> Unit): RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
-
-    var Items: MutableList<Character1> = mutableListOf()
-    fun set(items: List<Character1>) {
-        this.Items = items.toMutableList()
+class MyAdapter(
+    private val delet: (PersonDb) -> Unit,
+    private val addSome: (PersonDb) -> Unit,
+    private val info: (PersonDb) -> Unit
+) :
+    RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+    var item: List<PersonDb> = listOf()
+    fun set(items: List<PersonDb>) {
+        this.item = items
         notifyDataSetChanged()
     }
 
-    inner class MyViewHolder(itemBinding: RecyclerItemBinding) :
+    class MyViewHolder(itemBinding: RecyclerItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         private val binding = itemBinding
-        fun bind(character: Character1) {
+        fun bind(
+            character: PersonDb,
+            delet: (PersonDb) -> Unit,
+            addSome: (PersonDb) -> Unit,
+            info: (PersonDb) -> Unit
+        ) {
             binding.apply {
+                if (character.status == "Dead") {
+                    recitem.background.setColorFilter(Color.parseColor("#99F3EDED"), PorterDuff.Mode.SRC_ATOP)
+                } else if(character.status == "Alive") {
+                    recitem.background.setColorFilter(Color.parseColor("#99429DE6"), PorterDuff.Mode.SRC_ATOP)
+                }
+                else if (character.status == "unknown") {
+                    recitem.background.setColorFilter(Color.parseColor("#99C62C20"), PorterDuff.Mode.SRC_ATOP)
+                }
                 nameText.text = character.name
-                statusText.text = character.status
                 genderText.text = character.gender
 
-                 Glide.with(imageView.context)
+                Glide.with(imageView.context)
                     .load(character.image)
                     .into(imageView)
-                    btnDel.setOnClickListener {
-                       delet(character)
-                        notifyDataSetChanged()
-                    }
-                    btnAddToMyFavorite.setOnClickListener {
-                        addSome(character)
-                        notifyDataSetChanged()
-                    }
+                btnDel.setOnClickListener {
+                    delet(character)
+                }
+                if (character.isFavorite) {
+                    btnAddToMyFavorite.setColorFilter(Color.YELLOW)
+                } else {
+                    btnAddToMyFavorite.setColorFilter(Color.WHITE)
+                }
+
+                btnAddToMyFavorite.setOnClickListener {
+                    addSome(character)
+                }
+                recitem.setOnClickListener {
+                    info(character)
+                }
             }
             return
         }
-
-
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemBinding =
@@ -54,19 +74,10 @@ class MyAdapter (private val delet:(Character1) -> Unit,private val addSome:(Cha
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(Items[position])
-
+        holder.bind(item[position], delet, addSome, info)
     }
 
     override fun getItemCount(): Int {
-        return Items.size
+        return item.size
     }
-
-//    fun set(items: List<SomethingDb>){
-//        this.Items = listOf()
-//        this.Items = items
-//        notifyDataSetChanged()
-//    }
-
-
 }

@@ -1,47 +1,67 @@
 package com.example.api.HomeFragment
 
-import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.api.Character1
-import com.example.api.FavoritesViewModel
-import com.example.api.RepositoryRam
+import com.example.api.repository.RepositorySQLite
+import com.example.api.DBandprovider.PersonDb
 import com.example.api.Screens
-import com.example.architecturecomponent.repository.Repository
 import com.github.terrakok.cicerone.Router
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 
 class HomeViewModel (
     private val router: Router,
-    private val repo: Repository,
-    private val repo2:RepositoryRam
+    private val repositorySQLite: RepositorySQLite
         ): ViewModel() {
-    var listCharacters = MutableLiveData<List<Character1>>()
-    var listCall = MutableLiveData<List<Character1>?>()
+    private val _listCharacters = MutableStateFlow<List<PersonDb>>(emptyList())
+    val listCharacters :MutableStateFlow<List<PersonDb>> = _listCharacters
 
-    fun getCharacters(page: Int) {
+    fun searchAny(any:String){
         viewModelScope.launch {
-            val characters = repo2.getCharacters(page)
-            listCharacters.value = characters.results
-        }
-    }
-    fun favorite() {
-        router.navigateTo(Screens.getFavoriteFragment())
-    }
-    fun delSomething(it:Character1){
-        viewModelScope.launch {
-            val list = listCharacters.value?.toMutableList()
-            list?.remove(it)
-            listCharacters.value = list!!
+            _listCharacters.value = repositorySQLite.putInSearch(any)
         }
     }
 
-    fun takeThis(it:Character1){
-        viewModelScope.launch {
-            repo2.addFavorite(it)
+    fun viewSortPersons(statusApi:String,genderApi:String,speciesApi:String){
+        viewModelScope.launch (Dispatchers.IO){
+           _listCharacters.value = repositorySQLite.putInSort(statusApi,genderApi,speciesApi)
         }
+    }
+    fun putInFavorite(uuid:Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+           repositorySQLite.putInFavorite(uuid)
+        }
+    }
+
+    fun observeAllPersons()  {
+        viewModelScope.launch {
+            repositorySQLite.observeAllSomethingData().collect{
+                _listCharacters.value = it
+            }
+        }
+    }
+    fun routeToInfo(uuid:Int){
+        router.newRootScreen(Screens.getInfoFragment(uuid))
+    }
+    fun back() {
+        router.newRootScreen(Screens.getHomeFragment())
+    }
+
+    fun delPerson(model:PersonDb) {
+            viewModelScope.launch {
+                repositorySQLite.deletePerson(model)
+            }
+        }
+
+    fun toFavorite() {
+        router.newRootScreen(Screens.getFavoriteFragment())
+    }
+
+    fun goToSorting() {
+        router.newRootScreen(Screens.getSortFragment())
     }
 }
+
+

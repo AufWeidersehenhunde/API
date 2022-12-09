@@ -11,11 +11,10 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
 
+class MainActivity : AppCompatActivity() {
     private val viewModelMain: MainActivityViewModel by viewModel()
     private val navigatorHolder by inject<NavigatorHolder>()
-
     private val navigator = object : AppNavigator(this, R.id.host_main) {
         override fun setupFragmentTransaction(
             screen: FragmentScreen,
@@ -25,12 +24,15 @@ class MainActivity : AppCompatActivity() {
         ) {
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModelMain.create()
         setContentView(R.layout.activity_main)
-
+        viewModelMain.observeCharacters(1)
     }
+
+
     override fun onResumeFragments() {
         super.onResumeFragments()
         navigatorHolder.setNavigator(navigator)
