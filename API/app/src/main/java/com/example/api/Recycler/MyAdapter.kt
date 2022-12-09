@@ -22,10 +22,15 @@ class MyAdapter(
         notifyDataSetChanged()
     }
 
-    inner class MyViewHolder(itemBinding: RecyclerItemBinding) :
+    class MyViewHolder(itemBinding: RecyclerItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         private val binding = itemBinding
-        fun bind(character: PersonDb) {
+        fun bind(
+            character: PersonDb,
+            delet: (PersonDb) -> Unit,
+            addSome: (PersonDb) -> Unit,
+            info: (PersonDb) -> Unit
+        ) {
             binding.apply {
                 if (character.status == "Dead") {
                     recitem.background.setColorFilter(Color.parseColor("#99F3EDED"), PorterDuff.Mode.SRC_ATOP)
@@ -43,7 +48,6 @@ class MyAdapter(
                     .into(imageView)
                 btnDel.setOnClickListener {
                     delet(character)
-                    notifyDataSetChanged()
                 }
                 if (character.isFavorite) {
                     btnAddToMyFavorite.setColorFilter(Color.YELLOW)
@@ -53,7 +57,6 @@ class MyAdapter(
 
                 btnAddToMyFavorite.setOnClickListener {
                     addSome(character)
-                    notifyDataSetChanged()
                 }
                 recitem.setOnClickListener {
                     info(character)
@@ -71,7 +74,7 @@ class MyAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(item[position])
+        holder.bind(item[position], delet, addSome, info)
     }
 
     override fun getItemCount(): Int {

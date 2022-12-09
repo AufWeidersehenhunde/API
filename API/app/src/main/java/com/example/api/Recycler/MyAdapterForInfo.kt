@@ -17,10 +17,10 @@ class MyAdapterForInfo(private val plain: (String) -> Unit) :
         notifyDataSetChanged()
     }
 
-    inner class MyViewHolder(itemBinding: RecyclerItemForInfoBinding) :
+     class MyViewHolder(itemBinding: RecyclerItemForInfoBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         private val binding = itemBinding
-        fun bind(character: String) {
+        fun bind(character: String, plain: (String) -> Unit) {
             binding.apply {
                 if (character == null) {
                     Glide.with(imageViewInfo.context)
@@ -46,7 +46,7 @@ class MyAdapterForInfo(private val plain: (String) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(item[position])
+        holder.bind(item[position], plain)
 
     }
 

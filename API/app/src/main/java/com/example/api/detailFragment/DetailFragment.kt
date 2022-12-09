@@ -30,45 +30,48 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val uuidForDetail = arguments?.getInt(UUID)
-        val image = arguments?.getString(IMAGE)
+
         if (uuidForDetail != null) {
             viewModelDetail.getDetailFragment(uuidForDetail.toInt())
         }
-        fun bind(character: PersonDb) {
-            viewBinding.apply {
-                if (image == null) {
-                    Glide.with(imageViewDetail.context)
-                        .load(R.drawable.ic_baseline_power_off)
-                        .into(imageViewDetail)
-                } else {
-                    Glide.with(imageViewDetail.context)
-                        .load(character.image)
-                        .into(imageViewDetail)
-                }
+        observeElement()
+    }
+
+    private fun bind(character: PersonDb) {
+        val image = arguments?.getString(IMAGE)
+
+        with(viewBinding) {
+            if (image == null) {
+                Glide.with(imageViewDetail.context)
+                    .load(R.drawable.ic_baseline_power_off)
+                    .into(imageViewDetail)
+            } else {
+                Glide.with(imageViewDetail.context)
+                    .load(character.image)
+                    .into(imageViewDetail)
             }
-            viewBinding.btnSave.setOnClickListener {
-                Toast.makeText(context, "Download started...", Toast.LENGTH_SHORT).show()
-                val bitmap = viewBinding.imageViewDetail.drawable.toBitmap()
-                viewModelDetail.saveImage(requireContext(), bitmap)
-            }
-            viewBinding.back.setOnClickListener {
-                viewModelDetail.back()
-            }
-            viewBinding.nameOfPersons.text = character.name
         }
 
-        fun observeElement() {
-            viewLifecycleOwner.lifecycleScope.launch {
-                viewModelDetail.listCharacters.filterNotNull().collect {
-                    bind(it)
-                }
+        viewBinding.btnSave.setOnClickListener {
+            Toast.makeText(context, "Download started...", Toast.LENGTH_SHORT).show()
+            val bitmap = viewBinding.imageViewDetail.drawable.toBitmap()
+            viewModelDetail.saveImage(requireContext(), bitmap)
+        }
+        viewBinding.back.setOnClickListener {
+            viewModelDetail.back()
+        }
+        viewBinding.nameOfPersons.text = character.name
+    }
+
+    private fun observeElement() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModelDetail.listCharacters.filterNotNull().collect {
+                bind(it)
             }
         }
-        observeElement()
     }
 }
 

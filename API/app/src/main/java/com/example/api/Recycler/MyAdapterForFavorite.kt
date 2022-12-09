@@ -18,10 +18,10 @@ class MyAdapterForFavorite(private val remove: (PersonDb) -> Unit) :
         notifyDataSetChanged()
     }
 
-    inner class MyViewHolder(itemBinding: RecyclerItemBinding) :
+     class MyViewHolder(itemBinding: RecyclerItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         private val binding = itemBinding
-        fun bind(character: PersonDb) {
+        fun bind(character: PersonDb, remove: (PersonDb) -> Unit) {
             binding.apply {
                 nameText.text = character.name
                 genderText.text = character.gender
@@ -31,7 +31,6 @@ class MyAdapterForFavorite(private val remove: (PersonDb) -> Unit) :
                     .into(imageView)
                 btnDel.setOnClickListener {
                     remove(character)
-                    notifyDataSetChanged()
                 }
                 binding.btnAddToMyFavorite.isVisible = false
             }
@@ -46,7 +45,7 @@ class MyAdapterForFavorite(private val remove: (PersonDb) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(item[position])
+        holder.bind(item[position], remove)
 
     }
 
